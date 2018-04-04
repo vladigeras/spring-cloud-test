@@ -52,4 +52,10 @@ public class MainController {
         return html;
     }
 
+    //This method will call from eureka-client-1 with Load balanced Ribbon
+    @GetMapping(value = "/hello")
+    public String hello() {
+        return "<html>Hello from client-service-1</html>";
+    }
+
 }

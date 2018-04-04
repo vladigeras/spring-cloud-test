@@ -2,7 +2,6 @@ server:
   port: 8001
 
 eureka:
-  instance:
   client:
     serviceUrl:
       defaultZone: http://localhost:8000/eureka/
@@ -10,3 +9,11 @@ eureka:
 spring:
   application:
     name: client-service-1
+
+
+ping-server:
+  ribbon:
+    eureka:
+      enabled: false
+    listOfServers: localhost:8002,localhost:8022,localhost:8222   # eureka-client-2 and his replicas
+    ServerListRefreshInterval: 15000

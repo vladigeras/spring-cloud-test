@@ -9,3 +9,31 @@ eureka:
 spring:
   application:
     name: client-service-2
+
+---
+#---- replica 1-----#
+spring:
+  profiles: client-service-2-replica1
+eureka:
+  instance:
+    appname: client-service-2
+  client:
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8000/eureka/
+server:
+  port: 8022
+
+---
+#---- replica 2-----#
+spring:
+  profiles: client-service-2-replica2
+eureka:
+  instance:
+    appname: client-service-2
+  client:
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8000/eureka/
+server:
+  port: 8222
