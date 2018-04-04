@@ -11,9 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @RestController
 public class MainController {
+
+    private static final Logger LOGGER = Logger.getLogger(MainController.class.getName());
 
     @Autowired
     private DiscoveryClient discoveryClient;
@@ -23,11 +27,14 @@ public class MainController {
 
     @GetMapping(value = "/")
     public String home() {
+        LOGGER.log(Level.INFO, "Root method (/) from eureka-client-1 was called");
         return "<a href='testCallClient-service-2'>/Test Call client-service-2</a>";
     }
 
     @GetMapping(value = "/testCallClient-service-2")
-    public String showService() {
+    public String testCallClient() {
+
+        LOGGER.log(Level.INFO, "Test call method of client-service-2(/) from eureka-client-1 was called");
 
         String serviceId = "client-service-2".toLowerCase();
 

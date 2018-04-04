@@ -15,3 +15,6 @@ They can watch to each other.
 **_Load balancer Netflix Ribbon Feature:_** client 2 (**localhost:8002**) could have a replicas (copies), which available as
 **localhost:8022** and **localhost:8222**. Client 1 (**localhost:8001**) have a load balancer Ribbon. You can see example, where 
 Ribbon choose a replica of client 2 to run a request.
+
+**_Spring Sleuth Feature:_** clients use Sleuth technology to logging example. Sleuth turn on additional info about 
+incoming message.

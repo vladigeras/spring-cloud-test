@@ -8,9 +8,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @RestController
 public class MainController {
+
+    private static final Logger LOGGER = Logger.getLogger(MainController.class.getName());
+
 
     @Autowired
     private DiscoveryClient discoveryClient;
@@ -31,12 +36,14 @@ public class MainController {
         for (String serviceId : serviceIds) {
             html += "<br><a href='showService?serviceId=" + serviceId + "'>" + serviceId + "</a>";
         }
+        LOGGER.log(Level.INFO, "/showAllServiceIds method from eureka-client-2 was called");
         return html;
     }
 
     @GetMapping(value = "/showService")
     public String showService(@RequestParam(defaultValue = "") String serviceId) {
         List<ServiceInstance> instances = this.discoveryClient.getInstances(serviceId);
+        LOGGER.log(Level.INFO, "/showService method from eureka-client-2 was called");
 
         if (instances == null || instances.isEmpty()) {
             return "No instances for service: " + serviceId;
@@ -55,6 +62,7 @@ public class MainController {
     //This method will call from eureka-client-1 with Load balanced Ribbon
     @GetMapping(value = "/hello")
     public String hello() {
+        LOGGER.log(Level.INFO, "/hello method from eureka-client-2 was called");
         return "<html>Hello from client-service-1</html>";
     }
 
