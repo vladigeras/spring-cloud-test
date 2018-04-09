@@ -18,3 +18,6 @@ Ribbon choose a replica of client 2 to run a request.
 
 **_Spring Sleuth Feature:_** clients use Sleuth technology to logging example. Sleuth turn on additional info about 
 incoming message.
+
+**_CircuitBreaker feature of Netflix Hystrix:_** if method with mapping /hystrixTest from client 2 throw some error, then 
+it will replaced by method "defaultHystrixTest()" linked by Hystrix

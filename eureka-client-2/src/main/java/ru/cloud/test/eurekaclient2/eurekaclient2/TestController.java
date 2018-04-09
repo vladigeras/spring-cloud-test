@@ -1,5 +1,6 @@
 package ru.cloud.test.eurekaclient2.eurekaclient2;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -12,10 +13,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @RestController
-public class MainController {
+public class TestController {
 
-    private static final Logger LOGGER = Logger.getLogger(MainController.class.getName());
-
+    private static final Logger LOGGER = Logger.getLogger(TestController.class.getName());
 
     @Autowired
     private DiscoveryClient discoveryClient;
@@ -66,4 +66,14 @@ public class MainController {
         return "<html>Hello from client-service-1</html>";
     }
 
+    @HystrixCommand(defaultFallback = "defaultHystrixTest")
+    @GetMapping(value = "/hystrixTest")
+    public String hystrixTest() {
+        throw new RuntimeException("Error was call");
+//        return "All is ok, method working";
+    }
+
+    public String defaultHystrixTest() {
+        return "There are an exception, sorry :(";
+    }
 }
